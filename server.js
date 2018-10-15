@@ -5,7 +5,7 @@ var express = require('express'),
     engines = require('consolidate'),
     assert = require('assert'),
     ObjectId = require('mongodb').ObjectID,
-    url = 'mongodb://c4tssg2jmc:gh4FCk2jZVYMJGLRLochCt20mIa1D0qDShazjZMAHCsMi3FrzA9POfUWes4X5Rz6jIfG1NKdPJZSeaHdFCOBcg==@c4tssg2jmc.documents.azure.com:10255/?ssl=true';
+    url = 'mongodb://c4ts-jmc-mining-dgll:98RKyJBIWmBZwzDSAvKLVXmkmIvc7iEeBZHt1GlDIKKMItlIP4hki2XmPIr7Odno6w7a6JrilKB1uPJlx5MULg==@c4ts-jmc-mining-dgll.documents.azure.com:10255/?ssl=true&replicaSet=globaldbe';
 
 app.use(express.static(__dirname + "/public"));
 
