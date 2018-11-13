@@ -1,4 +1,4 @@
-angular.module('app', []);
+angular.module('app', ['angularUtils.directives.dirPagination']);
 
 angular
     .module('app')
@@ -7,6 +7,11 @@ angular
 AppCtrl.$inject = ['$scope', '$http'];
 
 function AppCtrl($scope, $http) {
+
+    $scope.currentPage = 1;
+    $scope.pageSize = 20;
+    $scope.totalCount = 0;
+
     var vm = this;
     vm.fields = [
         {label: 'Name', key: 'name'},
@@ -15,6 +20,7 @@ function AppCtrl($scope, $http) {
     ];
     vm.record = {};
     vm.records = [];
+    vm.totalItems = 0;
 
     vm.handleError = function(response) {
         console.log(response.status + " - " + response.statusText + " - " + response.data);
@@ -28,7 +34,8 @@ function AppCtrl($scope, $http) {
         });
     }
 
-    vm.getAllRecords();
+    //vm.getAllRecords();
+    
 
     vm.editMode = false;
     vm.saveRecord = function() {
@@ -78,5 +85,31 @@ function AppCtrl($scope, $http) {
         vm.record = {};
         vm.getAllRecords();
     }
+    
+    vm.getPartialRecords = function (num) {
+        $http.get('/records/' + num).then(function (response) {
+            vm.records = response.data;
+        }, function (response) {
+            vm.handleError(response);
+        });
+    }
+    //with cache
+    vm.getRecordsCount = function () {
+        $http.get('/recordscount').then(function (response) {
+            vm.totalItems = response.data;
+        }, function (response) {
+            vm.handleError(response);
+        });
+    }
+    vm.getRecordsCount();
+    vm.getPartialRecords($scope.currentPage);
+
+    //vm.getAllRecords();
+
+    $scope.pageChangeHandler = function (num) {
+        console.log('Page Changed To : ' + num);
+        vm.getPartialRecords(num);
+        $scope.currentPage = num;
+    };
 
 }
