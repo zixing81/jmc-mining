@@ -8,7 +8,7 @@ var express = require('express'),
     redis = require("redis"),
     redis_host = '',
     redis_key = '',
-    url = '';
+    url = 'mongodb://c4ts-jmc-mining-dgll:98RKyJBIWmBZwzDSAvKLVXmkmIvc7iEeBZHt1GlDIKKMItlIP4hki2XmPIr7Odno6w7a6JrilKB1uPJlx5MULg==@c4ts-jmc-mining-dgll.documents.azure.com:10255/?ssl=true&replicaSet=globaldb';
 
 app.use(express.static(__dirname + "/public"));
 
